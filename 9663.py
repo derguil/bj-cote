@@ -1,13 +1,32 @@
 import sys
 input=sys.stdin.readline
 
-n=int(input())
-ls=[[True]*n for _ in range(n)]
+n = int(input())
+num = 0
 
-def addQ(depth):
-  for row in ls:
-    
+cols = set()
+diag1 = set()
+diag2 = set()
 
-addQ(0)
+def dfs(row):
+    global num
+    if row == n:
+        num += 1
+        return
 
-print(ls)
+    for col in range(n):
+        if col in cols or (row - col) in diag1 or (row + col) in diag2:
+            continue
+
+        cols.add(col)
+        diag1.add(row - col)
+        diag2.add(row + col)
+
+        dfs(row + 1)
+
+        cols.remove(col)
+        diag1.remove(row - col)
+        diag2.remove(row + col)
+
+dfs(0)
+print(num)
