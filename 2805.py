@@ -1,8 +1,8 @@
 import sys
 input=sys.stdin.readline
 
-k,n=map(int, input().split())
-ls=sorted(list(int(input()) for _ in range(k)))
+n, m = map(int,input().split())
+ls = list(map(int,input().split()))
 
 start = 1
 end = max(ls)
@@ -12,9 +12,11 @@ while start <= end:
   mid = (start+end)//2
   resn = 0
   for i in ls:
-    resn += i//mid
+    ff = i - mid
+    if(ff > 0):
+      resn += ff
 
-  if(resn >= n):
+  if(resn >= m):
     res = mid
     start = mid + 1
   else:
